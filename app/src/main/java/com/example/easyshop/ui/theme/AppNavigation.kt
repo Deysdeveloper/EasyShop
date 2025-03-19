@@ -3,9 +3,11 @@ package com.example.easyshop.ui.theme
 import SignupScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.easyshop.Pages.CategoryProductsPage
 import com.example.easyshop.Pages.HomePage
 import com.example.easyshop.Screen.AuthScreen
 import com.example.easyshop.Screen.HomeScreen
@@ -17,6 +19,7 @@ import com.google.firebase.auth.auth
 fun AppNavigation(modifier: Modifier)
 {
     val navController = rememberNavController()
+    GlobalNavigation.navController= navController
 
     val isLoggedIn=Firebase.auth.currentUser!=null
     val firstpage=if(isLoggedIn) "home" else "auth"
@@ -36,6 +39,14 @@ fun AppNavigation(modifier: Modifier)
             HomeScreen(modifier,navController)
 
         }
+        composable("category-products/{categoryId}"){
+            var categoryId=it.arguments?.getString("categoryId")
+            CategoryProductsPage(modifier,categoryId?:"")
+
+        }
     }
 
+}
+object GlobalNavigation{
+    lateinit var navController: NavHostController
 }
