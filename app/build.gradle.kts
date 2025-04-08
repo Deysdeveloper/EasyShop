@@ -51,6 +51,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
+    implementation("com.google.android.gms:play-services-auth:21.3.0")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation ("io.coil-kt:coil-compose:2.2.0")

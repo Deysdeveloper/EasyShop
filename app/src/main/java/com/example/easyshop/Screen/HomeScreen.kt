@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -35,7 +36,7 @@ fun HomeScreen(modifier: Modifier, navController: NavHostController, authViewMod
         NavItem(label = "Cart", icon = Icons.Default.ShoppingCart),
         NavItem(label = "Profile", icon = Icons.Default.Person),
     )
-    var selectedIndex by remember {
+    var selectedIndex by rememberSaveable {
         mutableStateOf(0)
     }
     Scaffold(
