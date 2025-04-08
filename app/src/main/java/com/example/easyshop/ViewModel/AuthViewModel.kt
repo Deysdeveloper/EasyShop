@@ -50,6 +50,5 @@ class AuthViewModel:ViewModel() {
                     onResult(false,it.exception?.localizedMessage)
                 }
                 }
-
     }
 }

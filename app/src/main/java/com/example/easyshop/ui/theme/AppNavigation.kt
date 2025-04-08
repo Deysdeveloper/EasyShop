@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.easyshop.Pages.CategoryProductsPage
 import com.example.easyshop.Pages.HomePage
+import com.example.easyshop.Pages.ProductDetailsPage
 import com.example.easyshop.Screen.AuthScreen
 import com.example.easyshop.Screen.HomeScreen
 import com.example.easyshop.Screen.LoginScreen
@@ -23,27 +24,33 @@ fun AppNavigation(modifier: Modifier)
 
     val isLoggedIn=Firebase.auth.currentUser!=null
     val firstpage=if(isLoggedIn) "home" else "auth"
-    NavHost(navController = navController, startDestination = firstpage){
+    NavHost(navController = navController, startDestination = firstpage) {
 
-        composable("auth"){
-            AuthScreen(modifier,navController)
+        composable("auth") {
+            AuthScreen(modifier, navController)
         }
-        composable("login"){
-            LoginScreen(modifier,navController)
+        composable("login") {
+            LoginScreen(modifier, navController)
         }
-        composable("signup"){
-            SignupScreen(modifier,navController)
-
-        }
-        composable("home"){
-            HomeScreen(modifier,navController)
+        composable("signup") {
+            SignupScreen(modifier, navController)
 
         }
-        composable("category-products/{categoryId}"){
-            var categoryId=it.arguments?.getString("categoryId")
-            CategoryProductsPage(modifier,categoryId?:"")
+        composable("home") {
+            HomeScreen(modifier, navController)
 
         }
+        composable("category-products/{categoryId}") {
+            var categoryId = it.arguments?.getString("categoryId")
+            CategoryProductsPage(modifier, categoryId ?: "")
+
+        }
+        composable("product-details/{productId}") {
+            var productId = it.arguments?.getString("productId")
+            ProductDetailsPage(modifier, productId ?: "")
+        }
+
+
     }
 
 }
