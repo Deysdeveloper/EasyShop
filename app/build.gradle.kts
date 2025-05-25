@@ -55,6 +55,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation("com.razorpay:checkout:1.6.41")
     implementation ("io.coil-kt:coil-compose:2.2.0")
     implementation("com.tbuonomo:dotsindicator:5.1.0")
     testImplementation(libs.junit)

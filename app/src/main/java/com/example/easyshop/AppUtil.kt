@@ -1,12 +1,16 @@
 package com.example.easyshop
 
+import android.app.Activity
 import android.content.Context
 import android.widget.Toast
+import com.example.easyshop.ui.theme.GlobalNavigation
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.firestore
+import com.razorpay.Checkout
+import org.json.JSONObject
 
 object AppUtil {
 
@@ -86,5 +90,21 @@ object AppUtil {
         return 18.0f
 
     }
+    fun razorpayapikey(): String
+    {
+        return "rzp_test_y9yNnlbWdtFFsm"
+    }
+    fun StartPayments(amount:Float)
+    {
+        val checkout = Checkout()
+        checkout.setKeyID(razorpayapikey())
 
+        val options= JSONObject()
+        options.put("name","EasyShop")
+        options.put("description","Pay Now")
+        options.put("amount",(amount*100))
+        options.put("currency","INR")
+
+        checkout.open(GlobalNavigation.navController.context as Activity,options)
+    }
 }

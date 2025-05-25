@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -116,6 +117,12 @@ fun CheckoutPage(modifier: Modifier) {
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center)
+        Spacer(modifier= Modifier.height(16.dp))
+        Button(onClick = {
+            AppUtil.StartPayments(Total.value)
+        },modifier= Modifier.fillMaxWidth()) {
+            Text(text="Pay Now")
+        }
 
 
 
