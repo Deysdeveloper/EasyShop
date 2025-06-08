@@ -61,7 +61,7 @@ fun CheckoutPage(modifier: Modifier) {
             if(it.actualprice.isNotEmpty())
             {
                 val qty=userModel.value.CartItems[it.id]?:0
-                subTotal.value +=it.actualprice.toFloat()*qty
+                subTotal.value +=it.actualprice.toInt()*qty
             }
         }
         discount.value=subTotal.value* AppUtil.getDiscountPercentage() /100
@@ -100,6 +100,8 @@ fun CheckoutPage(modifier: Modifier) {
         Spacer(modifier= Modifier.height(16.dp))
         Text(text="Deliver to:", fontWeight = FontWeight.Bold)
         Text(text=userModel.value.name)
+        Text(text="Address:", fontWeight = FontWeight.Bold)
+        Text(text=userModel.value.address)
         HorizontalDivider()
         Spacer(modifier= Modifier.height(16.dp))
         RowCheckoutItems(modifier = Modifier,title = "Sub Total", value = subTotal.value.toString())

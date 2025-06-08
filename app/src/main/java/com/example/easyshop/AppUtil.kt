@@ -3,21 +3,24 @@ package com.example.easyshop
 import android.app.Activity
 import android.content.Context
 import android.widget.Toast
+import com.example.easyshop.Model.OrderModel
 import com.example.easyshop.ui.theme.GlobalNavigation
 import com.google.firebase.Firebase
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.firestore
 import com.razorpay.Checkout
 import org.json.JSONObject
+import java.util.UUID
 
 object AppUtil {
 
-    fun showToast(context: Context,message:String)
-    {
-        Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
+    fun showToast(context: Context, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
+
     fun addItemToCart(productId: String, context: Context) {
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser == null) {
@@ -47,7 +50,8 @@ object AppUtil {
             }
         }
     }
-    fun removeItemFromCart(productId: String, context: Context,removeAll:Boolean=false) {
+
+    fun removeItemFromCart(productId: String, context: Context, removeAll: Boolean = false) {
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser == null) {
             showToast(context, "User not logged in")
@@ -63,10 +67,10 @@ object AppUtil {
                 val updatedQuantity = currentQuantity - 1
 
                 val updatedCart =
-                    if(updatedQuantity<=0 || removeAll)
+                    if (updatedQuantity <= 0 || removeAll)
                         mapOf("CartItems.$productId" to FieldValue.delete())
                     else
-                    mapOf("CartItems.$productId" to updatedQuantity)
+                        mapOf("CartItems.$productId" to updatedQuantity)
 
                 userDoc.update(updatedCart).addOnCompleteListener {
                     if (it.isSuccessful) {
@@ -81,30 +85,56 @@ object AppUtil {
         }
     }
 
-    fun getDiscountPercentage():Float
-    {
-        return 10.0f
+    fun clearCartAndAddToOrders() {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val userDoc = Firebase.firestore.collection("users")
+            .document(currentUser?.uid!!)
+        userDoc.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val currentCart = task.result.get("CartItems") as? Map<String, Long> ?: emptyMap()
+                val order= OrderModel(
+                    id="ORD"+UUID.randomUUID().toString().replace("-","").take(10).uppercase(),
+                    userId = FirebaseAuth.getInstance().currentUser?.uid!!,
+                    date=Timestamp.now(),
+                    items = currentCart,
+                    status = "ORDERED",
+                    address = task.result.get("address") as String
+                )
+                Firebase.firestore.collection("orders").
+                document(order.id).set(order)
+                    .addOnCompleteListener {
+                        if(it.isSuccessful)
+                        {
+                            userDoc.update("CartItems",FieldValue.delete())
+                        }
+                    }
+            }
+        }
     }
-    fun getTaxPercentage():Float
-    {
-        return 18.0f
+
+    fun getDiscountPercentage(): Float {
+                return 10.0f
+    }
+
+    fun getTaxPercentage(): Float {
+                return 18.0f
 
     }
-    fun razorpayapikey(): String
-    {
-        return "rzp_test_y9yNnlbWdtFFsm"
-    }
-    fun StartPayments(amount:Float)
-    {
-        val checkout = Checkout()
-        checkout.setKeyID(razorpayapikey())
 
-        val options= JSONObject()
-        options.put("name","EasyShop")
-        options.put("description","Pay Now")
-        options.put("amount",(amount*100))
-        options.put("currency","INR")
-
-        checkout.open(GlobalNavigation.navController.context as Activity,options)
+    fun razorpayapikey(): String {
+                return "rzp_test_y9yNnlbWdtFFsm"
     }
-}
+
+    fun StartPayments(amount: Float) {
+                val checkout = Checkout()
+                checkout.setKeyID(razorpayapikey())
+
+                val options = JSONObject()
+                options.put("name", "EasyShop")
+                options.put("description", "Pay Now")
+                options.put("amount", (amount * 100))
+                options.put("currency", "INR")
+
+                checkout.open(GlobalNavigation.navController.context as Activity, options)
+            }
+        }

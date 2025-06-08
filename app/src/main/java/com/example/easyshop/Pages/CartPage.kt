@@ -73,20 +73,34 @@ fun CartPage(modifier: Modifier)
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold
         )
+        if(userModel.value.CartItems.isNotEmpty())
+        {
+            LazyColumn() {
+                items(userModel.value.CartItems.toList(),key={it.first}) {(productId,qty)->
+                    CartItemView(modifier,productId = productId, qty = qty)
+                }
 
-        LazyColumn() {
-            items(userModel.value.CartItems.toList(),key={it.first}) {(productId,qty)->
-                CartItemView(modifier,productId = productId, qty = qty)
+            }
+            ExtendedFloatingActionButton(onClick = {
+                GlobalNavigation.navController.navigate("checkout")
+            },
+                modifier.fillMaxWidth().
+                height(50.dp),) {
+                Text(text="Checkout")
             }
 
+        }else{
+            Column(modifier= Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally)
+            {
+                Text(text="Your Cart is Empty",
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold)
+
+            }
         }
-        ExtendedFloatingActionButton(onClick = {
-            GlobalNavigation.navController.navigate("checkout")
-        },
-            modifier.fillMaxWidth().
-            height(50.dp),) {
-            Text(text="Checkout")
-        }
+
     }
 }
 
