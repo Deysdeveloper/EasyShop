@@ -7,8 +7,13 @@ Integrated Razorpay payment gateway for secure, real-time transaction via UPI, c
 <div style="display: flex; gap: 100px;">
   <img src="https://github.com/Deysdeveloper/EasyShop/blob/master/WhatsApp%20Image%20Aug%202%202025%20(2).jpeg?raw=true" width="250"/>
   <img src="https://github.com/Deysdeveloper/EasyShop/blob/master/WhatsApp%20Image%20Aug%202%202025%20(3).jpeg?raw=true" width="250"/>
+  <img src="https://github.com/Deysdeveloper/EasyShop/blob/master/WhatsApp%20Image%20Aug%202%202025%20(4).jpeg?raw=true" width="250"/>
 </div>
 
+<div style="display: flex; gap: 100px;">
+  <img src="https://github.com/Deysdeveloper/EasyShop/blob/master/WhatsApp%20Image%20Aug%202%202025%20(5).jpeg?raw=true" width="250"/>
+  <img src="https://github.com/Deysdeveloper/EasyShop/blob/master/WhatsApp%20Image%20Aug%202%202025%20(6).jpeg?raw=true" width="250"/>
+</div>
 
 
 
