@@ -4,7 +4,7 @@ Applied Android best practices for clean architecture and maintainable code, opt
 Integrated Razorpay payment gateway for secure, real-time transaction via UPI, cards and wallets, enhancing user trust and purchase environments.
 
 
-<div style="display: flex; gap: 25px;">
+<div style="display: flex; gap: 100px;">
   <img src="https://github.com/Deysdeveloper/EasyShop/blob/master/WhatsApp%20Image%20Aug%202%202025%20(2).jpeg?raw=true" width="250"/>
   <img src="https://github.com/Deysdeveloper/EasyShop/blob/master/WhatsApp%20Image%20Aug%202%202025%20(3).jpeg?raw=true" width="250"/>
 </div>
