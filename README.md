@@ -3,7 +3,7 @@ Implemented core features including product listing, detail view, and dynamic co
 Applied Android best practices for clean architecture and maintainable code, optimizing performance, enhancing scalability, and improving UI responsiveness.
 Integrated Razorpay payment gateway for secure, real-time transaction via UPI, cards and wallets, enhancing user trust and purchase environments.
 
-<img src="https://github.com/Deysdeveloper/EasyShop/blob/master/WhatsApp%20Image%20Aug%202%202025%20(1).jpeg?raw=true" width="300" height="200"/>
+<img src="https://github.com/Deysdeveloper/EasyShop/blob/master/WhatsApp%20Image%20Aug%202%202025%20(1).jpeg?raw=true" width="400" height="300"/>
 
 ![image alt](https://github.com/Deysdeveloper/EasyShop/blob/master/WhatsApp%20Image%20Aug%202%202025%20(2).jpeg?raw=true)
 
